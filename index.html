@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Concerto App Home</title>
   
+  <script src="../../../scripts/buildfire.js"></script>
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -24,7 +26,7 @@
       -webkit-touch-callout: none;
       overflow-x: hidden;
     }
-    a { text-decoration: none; color: inherit; display: block; }
+    .bf-click { cursor: pointer; display: block; } /* For clickable divs */
 
     /* ─── FLOATING HEADER (IPHONE SAFE) ─── */
     header {
@@ -39,7 +41,7 @@
     .header-logo {
       height: 28px; 
       object-fit: contain;
-      mix-blend-mode: multiply; /* Makes white background transparent */
+      mix-blend-mode: multiply;
     }
 
     /* ─── MAIN CONTENT ─── */
@@ -105,7 +107,7 @@
     .tour-scroll {
       display: flex; overflow-x: auto; gap: 12px; margin-bottom: 32px;
       scrollbar-width: none; -webkit-overflow-scrolling: touch;
-      padding-bottom: 5px; /* Room for shadow */
+      padding-bottom: 5px; 
     }
     .tour-scroll::-webkit-scrollbar { display: none; }
 
@@ -184,7 +186,7 @@
   <main>
     <div class="container">
       
-      <a href="/itinerary" class="hero-card">
+      <div class="hero-card bf-click" onclick="buildfire.actionItems.execute({ title: 'Featured Tours', action: 'linkToApp', instanceId: '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765328171752' }, () => {})">
         <div class="hero-top">
           <span class="hero-eyebrow">Your Next Event</span>
           <h3 class="hero-artist">Lady Gaga</h3>
@@ -210,49 +212,63 @@
           </div>
           <span class="hero-arrow">&rsaquo;</span>
         </div>
-      </a>
+      </div>
 
-      <div class="section-header">
+      <div class="section-header bf-click" onclick="buildfire.actionItems.execute({ title: 'Featured Tours', action: 'linkToApp', instanceId: '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765328171752' }, () => {})">
         <h2 class="section-title">Featured Tours</h2>
         <span class="section-subtitle">Trending Now</span>
       </div>
 
       <div class="tour-scroll">
-        <a href="/tour/gaga" class="tour-card">
+        <div class="tour-card bf-click" onclick="buildfire.actionItems.execute({ title: 'Featured Tours', action: 'linkToApp', instanceId: '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765328171752' }, () => {})">
           <img src="https://buildfire.imgix.net/8ef92dbd-0a8b-11f0-a97f-12565309935d/gaga.jpeg?auto=format&fit=crop&q=80&w=400" class="tour-img" alt="Lady Gaga">
           <div class="tour-info">
             <h4 class="tour-name">Lady Gaga</h4>
             <p class="tour-desc">The Mayhem Ball Tour</p>
           </div>
-        </a>
-        <a href="/tour/styles" class="tour-card">
+        </div>
+        <div class="tour-card bf-click" onclick="buildfire.actionItems.execute({ title: 'Featured Tours', action: 'linkToApp', instanceId: '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765328171752' }, () => {})">
           <img src="https://buildfire.imgix.net/8ef92dbd-0a8b-11f0-a97f-12565309935d/img_4557.jpeg?auto=format&fit=crop&q=80&w=400" class="tour-img" alt="Harry Styles">
           <div class="tour-info">
             <h4 class="tour-name">Harry Styles</h4>
             <p class="tour-desc">Together, Together Tour</p>
           </div>
-        </a>
-        <a href="/tour/gray" class="tour-card">
+        </div>
+        <div class="tour-card bf-click" onclick="buildfire.actionItems.execute({ title: 'Featured Tours', action: 'linkToApp', instanceId: '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765328171752' }, () => {})">
           <img src="https://buildfire.imgix.net/8ef92dbd-0a8b-11f0-a97f-12565309935d/img_4552.jpeg?auto=format&fit=crop&q=80&w=400" class="tour-img" alt="Conan Gray">
           <div class="tour-info">
             <h4 class="tour-name">Conan Gray</h4>
             <p class="tour-desc">Wishbone World Tour</p>
           </div>
-        </a>
-        <a href="/tour/sheeran" class="tour-card">
+        </div>
+        <div class="tour-card bf-click" onclick="buildfire.actionItems.execute({ title: 'Featured Tours', action: 'linkToApp', instanceId: '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765328171752' }, () => {})">
           <img src="https://buildfire.imgix.net/8ef92dbd-0a8b-11f0-a97f-12565309935d/img_4554.jpeg?auto=format&fit=crop&q=80&w=400" class="tour-img" alt="Ed Sheeran">
           <div class="tour-info">
             <h4 class="tour-name">Ed Sheeran</h4>
             <p class="tour-desc">The LOOP Tour</p>
           </div>
-        </a>
-        <a href="/tour/lovato" class="tour-card">
+        </div>
+        <div class="tour-card bf-click" onclick="buildfire.actionItems.execute({ title: 'Featured Tours', action: 'linkToApp', instanceId: '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765328171752' }, () => {})">
           <img src="https://buildfire.imgix.net/8ef92dbd-0a8b-11f0-a97f-12565309935d/img_4556.jpeg?auto=format&fit=crop&q=80&w=400" class="tour-img" alt="Demi Lovato">
           <div class="tour-info">
             <h4 class="tour-name">Demi Lovato</h4>
             <p class="tour-desc">It's Not That Deep</p>
           </div>
-        </a>
+        </div>
+        <div class="tour-card bf-click" onclick="buildfire.actionItems.execute({ title: 'Featured Tours', action: 'linkToApp', instanceId: '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765328171752' }, () => {})">
+          <img src="https://buildfire.imgix.net/8ef92dbd-0a8b-11f0-a97f-12565309935d/img_4559.jpeg?auto=format&fit=crop&q=80&w=400" class="tour-img" alt="Olivia Dean">
+          <div class="tour-info">
+            <h4 class="tour-name">Olivia Dean</h4>
+            <p class="tour-desc">The Art of Loving Tour</p>
+          </div>
+        </div>
+        <div class="tour-card bf-click" onclick="buildfire.actionItems.execute({ title: 'Featured Tours', action: 'linkToApp', instanceId: '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765328171752' }, () => {})">
+          <img src="https://buildfire.imgix.net/8ef92dbd-0a8b-11f0-a97f-12565309935d/img_1194.jpeg?auto=format&fit=crop&q=80&w=400" class="tour-img" alt="Noah Kahan">
+          <div class="tour-info">
+            <h4 class="tour-name">Noah Kahan</h4>
+            <p class="tour-desc">The Great Divide Tour</p>
+          </div>
+        </div>
       </div>
 
       <div class="section-header">
@@ -261,22 +277,22 @@
       </div>
 
       <div class="premium-grid">
-        <a href="/concerto-plus" class="premium-item">
+        <div class="premium-item bf-click" onclick="buildfire.actionItems.execute({title:'Concerto+', action:'linkToApp', instanceId:'169d5e94-6c5e-4769-b4ca-a7d0175985e7-1753914028797'}, () => {})">
           <h4 class="premium-title">Concerto+</h4>
           <p class="premium-desc">Your AI timeline and custom itinerary.</p>
-        </a>
-        <a href="/bag-check" class="premium-item">
+        </div>
+        <div class="premium-item bf-click" onclick="buildfire.actionItems.execute({title:'Bag Check', action:'linkToApp', instanceId:'169d5e94-6c5e-4769-b4ca-a7d0175985e7-1772922931812'}, () => {})">
           <h4 class="premium-title">Bag Check</h4>
           <p class="premium-desc">Instant camera verification for venues.</p>
-        </a>
-        <a href="/live-mode" class="premium-item">
+        </div>
+        <div class="premium-item bf-click" onclick="buildfire.actionItems.execute({title:'Live Mode', action:'linkToApp', instanceId:'169d5e94-6c5e-4769-b4ca-a7d0175985e7-1772904343170'}, () => {})">
           <h4 class="premium-title">Live Mode</h4>
           <p class="premium-desc">In-show hub and personalized recaps.</p>
-        </a>
-        <a href="/festivals" class="premium-item">
+        </div>
+        <div class="premium-item bf-click" onclick="buildfire.actionItems.execute({title:'Festivals', action:'linkToApp', instanceId:'169d5e94-6c5e-4769-b4ca-a7d0175985e7-1766434667939'}, () => {})">
           <h4 class="premium-title">Festivals</h4>
           <p class="premium-desc">Multi-day lineups and survival intel.</p>
-        </a>
+        </div>
       </div>
 
       <div class="section-header">
@@ -284,18 +300,18 @@
       </div>
 
       <div class="essentials-grid">
-        <a href="/city-guides" class="essential-btn">City Guides <span class="essential-arrow">&rsaquo;</span></a>
-        <a href="/events" class="essential-btn">Events Near Me <span class="essential-arrow">&rsaquo;</span></a>
-        <a href="/setlists" class="essential-btn">Setlists & Info <span class="essential-arrow">&rsaquo;</span></a>
-        <a href="/merch" class="essential-btn">Merch Locator <span class="essential-arrow">&rsaquo;</span></a>
-        <a href="/rideshare" class="essential-btn">Rideshare <span class="essential-arrow">&rsaquo;</span></a>
-        <a href="/bag-policies" class="essential-btn">Bag Policies <span class="essential-arrow">&rsaquo;</span></a>
-        <a href="/parking" class="essential-btn">Parking Maps <span class="essential-arrow">&rsaquo;</span></a>
-        <a href="/concessions" class="essential-btn">Concessions <span class="essential-arrow">&rsaquo;</span></a>
+        <div class="essential-btn bf-click" onclick="buildfire.actionItems.execute({ title: 'City Guides', action: 'linkToApp', instanceId: '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1764797790704' }, () => {})">City Guides <span class="essential-arrow">&rsaquo;</span></div>
+        <div class="essential-btn bf-click" onclick="buildfire.actionItems.execute({ title: 'Events Near Me', action: 'linkToApp', instanceId: '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1764709877985' }, () => {})">Events Near Me <span class="essential-arrow">&rsaquo;</span></div>
+        <div class="essential-btn bf-click" onclick="buildfire.actionItems.execute({ title: 'Setlists & Info', action: 'linkToApp', instanceId: '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1767642157588' }, () => {})">Setlists & Info <span class="essential-arrow">&rsaquo;</span></div>
+        <div class="essential-btn bf-click" onclick="buildfire.actionItems.execute({ title: 'Merch Locations', action: 'linkToApp', instanceId: 'ba4139dd-09c6-4121-aa4a-c72570af07fc-1745876476208' }, () => {})">Merch Locator <span class="essential-arrow">&rsaquo;</span></div>
+        <div class="essential-btn bf-click" onclick="buildfire.actionItems.execute({title:'Rideshare', action:'linkToApp', instanceId:'169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765237012145'}, () => {})">Rideshare <span class="essential-arrow">&rsaquo;</span></div>
+        <div class="essential-btn bf-click" onclick="buildfire.actionItems.execute({title:'Bag Policies', action:'linkToApp', instanceId:'169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765234047030'}, () => {})">Bag Policies <span class="essential-arrow">&rsaquo;</span></div>
+        <div class="essential-btn bf-click" onclick="buildfire.actionItems.execute({title:'Parking', action:'linkToApp', instanceId:'169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765234093628'}, () => {})">Parking Maps <span class="essential-arrow">&rsaquo;</span></div>
+        <div class="essential-btn bf-click" onclick="buildfire.actionItems.execute({title:'Concessions', action:'linkToApp', instanceId:'169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765234072898'}, () => {})">Concessions <span class="essential-arrow">&rsaquo;</span></div>
       </div>
 
       <div class="utility-row">
-        <a href="/weather" class="utility-btn">Local Weather</a>
+        <div class="utility-btn bf-click" onclick="buildfire.actionItems.execute({title:'Weather', action:'linkToApp', instanceId:'0843baa9-8b51-4ba9-8357-7a114a69dd4e-1745352270979'}, () => {})">Local Weather</div>
         <a href="mailto:support@concertocity.com" class="utility-btn">App Support</a>
       </div>
 
