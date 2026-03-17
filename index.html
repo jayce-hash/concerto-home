@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Concerto App Home</title>
   
-  <script src="../../../scripts/buildfire.js"></script>
+  <script src="https://app.buildfire.com/scripts/buildfire.js"></script>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,7 +26,8 @@
       -webkit-touch-callout: none;
       overflow-x: hidden;
     }
-    .bf-click { cursor: pointer; display: block; } /* For clickable divs */
+    a { text-decoration: none; color: inherit; display: block; }
+    .bf-click { cursor: pointer; display: block; }
 
     /* ─── FLOATING HEADER (IPHONE SAFE) ─── */
     header {
@@ -39,9 +40,9 @@
       z-index: 100; border-bottom: 1px solid rgba(18, 30, 54, 0.05);
     }
     .header-logo {
-      height: 28px; 
+      height: 32px; 
       object-fit: contain;
-      mix-blend-mode: multiply;
+      mix-blend-mode: multiply; /* Makes the white background of your logo invisible */
     }
 
     /* ─── MAIN CONTENT ─── */
@@ -180,7 +181,7 @@
 <body>
 
   <header>
-    <img src="YOUR_LOGO_URL_HERE.png" alt="CONCERTO" class="header-logo">
+    <img src="logo.png" alt="CONCERTO" class="header-logo">
   </header>
 
   <main>
