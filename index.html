@@ -36,35 +36,32 @@
     }
     a:active { opacity: 0.75; }
 
-    /* ─── STICKY HEADER ─── */
-    /* FIXED: Removed backdrop-filter — it creates a stacking context that
-       swallows touch events in BuildFire's WebView on some devices.
-       Using a solid semi-transparent bg instead. */
+    /* ─── FIXED HEADER ─── */
     header {
-      position: sticky;
+      position: fixed;
       top: 0;
-      width: 100%;
-      background: rgba(248, 249, 249, 0.97);
+      left: 0;
+      right: 0;
+      height: 80px;
+      background: #F8F9F9;
       z-index: 100;
-      border-bottom: 1px solid rgba(18, 30, 54, 0.05);
-      padding-top: max(env(safe-area-inset-top), 40px);
-      padding-bottom: 15px;
       display: flex;
       justify-content: center;
-      align-items: flex-end;
+      align-items: center;
+      pointer-events: none;
     }
     .header-logo {
-      width: 240px;
+      width: 200px;
       height: auto;
       object-fit: contain;
       mix-blend-mode: multiply;
       display: block;
-      pointer-events: none;
     }
 
     /* ─── MAIN CONTENT ─── */
     main {
-      padding: 20px 0 60px;
+      padding-top: 95px;
+      padding-bottom: 60px;
     }
     .container { padding: 0 20px; }
 
@@ -431,13 +428,13 @@
 
       <div class="utility-row">
         <a href="javascript:void(0)" class="utility-btn" onclick="buildfire.actionItems.execute({title:'Weather', action:'linkToApp', instanceId:'0843baa9-8b51-4ba9-8357-7a114a69dd4e-1745352270979'}, function(){})">Local Weather</a>
-        <a href="mailto:support@concertocity.com" class="utility-btn">App Support</a>
+        <a href="/cdn-cgi/l/email-protection#6615131616091412260509080503141209050f121f4805090b" class="utility-btn">App Support</a>
       </div>
 
     </div>
   </main>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     var eventDate = new Date();
     eventDate.setDate(eventDate.getDate() + 42);
     eventDate.setHours(eventDate.getHours() + 14);
@@ -454,13 +451,4 @@
 
         document.getElementById('days').innerText = d.toString().padStart(2, '0');
         document.getElementById('hours').innerText = h.toString().padStart(2, '0');
-        document.getElementById('mins').innerText = m.toString().padStart(2, '0');
-      }
-    }
-
-    updateTimer();
-    setInterval(updateTimer, 60000);
-  </script>
-
-</body>
-</html>
+        document.getElementB
