@@ -1,259 +1,208 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Concerto Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* ─── APP SHELL & COLORS ─── */
+  .concerto-app {
+    background-color: #F8F9F9;
+    color: #121E36;
+    font-family: 'DM Sans', sans-serif !important;
+    padding-bottom: 40px;
+    -webkit-font-smoothing: antialiased;
+  }
 
-  <style>
-    :root {
-      --bg: #F0F2F5; 
-      --card-bg: #FFFFFF;
-      --text: #121E36;
-      --text-dim: rgba(18, 30, 54, 0.55);
-      --border: rgba(18, 30, 54, 0.06);
-      --gold: #C9A84C;
-    }
+  /* ─── HEADERS ─── */
+  .section-header {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    padding: 30px 20px 15px; cursor: pointer;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif !important; 
+    font-size: 26px !important; 
+    font-weight: 700 !important; 
+    color: #121E36; margin: 0; line-height: 1; letter-spacing: -0.01em;
+  }
+  .section-subtitle {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.15em; 
+    color: #C9A84C; text-transform: uppercase; margin-bottom: 4px;
+    font-family: 'DM Sans', sans-serif !important;
+  }
+  .section-arrow { font-size: 22px; color: #C0C0C0; line-height: 1; font-family: 'DM Sans', sans-serif !important; }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-    html, body {
-      background-color: var(--bg); color: var(--text);
-      font-family: 'DM Sans', sans-serif;
-      overscroll-behavior-y: none; -webkit-font-smoothing: antialiased;
-      width: 100vw; overflow-x: hidden;
-    }
+  /* ─── SCROLLING CAROUSELS ─── */
+  .h-scroll {
+    display: flex; overflow-x: auto; gap: 12px; padding: 0 20px 10px;
+    scrollbar-width: none; -webkit-overflow-scrolling: touch;
+  }
+  .h-scroll::-webkit-scrollbar { display: none; }
 
-    .dashboard { 
-      padding: env(safe-area-inset-top, 20px) 20px calc(env(safe-area-inset-bottom, 20px) + 80px); 
-      display: flex; flex-direction: column; gap: 24px; 
-    }
+  /* ─── TOUR CARDS ─── */
+  .tour-card {
+    flex: 0 0 140px; background: #FFFFFF; border: 1px solid rgba(18, 30, 54, 0.08);
+    border-radius: 14px; box-shadow: 0 4px 15px rgba(18, 30, 54, 0.04);
+    overflow: hidden; transition: transform 0.2s ease; cursor: pointer;
+    display: flex; flex-direction: column;
+  }
+  .tour-card:active { transform: scale(0.96); }
+  .tour-img { width: 100%; height: 160px; object-fit: cover; display: block; }
+  .tour-info { padding: 10px; flex-grow: 1; }
+  .tour-name { 
+    font-family: 'Cormorant Garamond', serif !important; 
+    font-size: 16px !important; 
+    font-weight: 700 !important; 
+    margin: 0 0 2px; color: #121E36; white-space: normal; line-height: 1.1; 
+  }
+  .tour-desc { 
+    font-size: 10px; color: rgba(18, 30, 54, 0.55); 
+    white-space: normal; line-height: 1.2; margin: 0; 
+    font-family: 'DM Sans', sans-serif !important;
+  }
 
-    /* ─── APP HEADER ─── */
-    .app-header { 
-      display: flex; flex-direction: column; align-items: center; 
-      padding: 20px 0 10px; position: relative;
-    }
-    .main-logo { width: 190px; height: auto; display: block; margin-bottom: 5px; }
-    .add-event-btn { position: absolute; right: 4px; bottom: 12px; font-size: 28px; font-weight: 300; opacity: 0.3; cursor: pointer; }
+  /* ─── BUTTONS (MOBILE OPTIMIZED) ─── */
+  .btn-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 10px 20px 20px;
+  }
+  .btn-solid {
+    background: #121E36; color: #F8F9F9; border: none; border-radius: 12px;
+    padding: 10px 8px;
+    min-height: 44px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 12px !important; 
+    font-weight: 700 !important; 
+    text-transform: uppercase; letter-spacing: 0.05em;
+    box-shadow: 0 8px 20px rgba(18, 30, 54, 0.15); cursor: pointer; transition: transform 0.2s;
+    text-align: center;
+  }
+  .btn-solid:active { transform: scale(0.96); }
 
-    /* ─── UP NEXT CARD ─── */
-    .up-next-card {
-      background: var(--text); color: #fff; border-radius: 30px;
-      padding: 24px; position: relative; overflow: hidden;
-      box-shadow: 0 16px 40px rgba(18, 30, 54, 0.2); transition: transform 0.2s;
-    }
-    .up-next-card:active { transform: scale(0.98); }
-    .up-next-tag { background: rgba(255,255,255,0.1); color: #fff; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; padding: 5px 12px; border-radius: 999px; width: fit-content; margin-bottom: 20px; }
-    .up-next-title { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 700; line-height: 1; margin-bottom: 6px; }
-    .up-next-venue { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.6); margin-bottom: 20px; }
-    .countdown-row { display: flex; gap: 8px; }
-    .cd-box { background: rgba(255,255,255,0.08); border-radius: 14px; padding: 10px; flex: 1; text-align: center; }
-    .cd-num { font-size: 22px; font-weight: 800; line-height: 1; margin-bottom: 2px; }
-    .cd-label { font-size: 8px; font-weight: 700; text-transform: uppercase; color: rgba(255,255,255,0.4); }
+  .pill-btn {
+    flex: 0 0 auto; background: #FFFFFF; border: 1px solid rgba(18, 30, 54, 0.08);
+    border-radius: 999px; 
+    padding: 10px 20px;
+    min-height: 40px;
+    display: flex; align-items: center; justify-content: center;
+    color: #121E36; 
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 12px !important; 
+    font-weight: 600 !important; 
+    text-transform: uppercase; letter-spacing: 0.05em;
+    box-shadow: 0 4px 12px rgba(18, 30, 54, 0.03); cursor: pointer; transition: transform 0.2s;
+  }
+  .pill-btn:active { transform: scale(0.96); }
+  
+  .pill-btn.premium {
+    border-color: rgba(201, 168, 76, 0.4); background: rgba(201, 168, 76, 0.05); color: #121E36;
+  }
+  .pill-btn.dark {
+    background: #121E36; color: #F8F9F9; border: none; box-shadow: 0 6px 15px rgba(18, 30, 54, 0.15);
+  }
 
-    /* ─── SECTION TITLES ─── */
-    .section-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 700; margin-bottom: 12px; padding-left: 4px; }
+  /* ─── DISCLAIMER ─── */
+  .disclaimer {
+    text-align: center; padding: 30px 20px; font-size: 10px; font-weight: 500;
+    color: rgba(18, 30, 54, 0.4); line-height: 1.6; border-top: 1px solid rgba(18, 30, 54, 0.05);
+    margin-top: 20px; font-family: 'DM Sans', sans-serif !important;
+  }
+  .disclaimer a { color: #121E36; font-weight: 700; text-decoration: none; }
+</style>
 
-    /* ─── HORIZONTAL CAROUSELS ─── */
-    .h-scroll {
-      display: flex; overflow-x: auto; gap: 12px; padding-bottom: 10px;
-      scrollbar-width: none; -webkit-overflow-scrolling: touch; scroll-snap-type: x mandatory;
-      margin: 0 -20px; padding-left: 20px; padding-right: 20px;
-    }
-    .h-scroll::-webkit-scrollbar { display: none; }
-    .scroll-item { scroll-snap-align: start; flex-shrink: 0; }
-    
-    .tour-card {
-      width: 140px; background: var(--card-bg); border: 1px solid var(--border);
-      border-radius: 16px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-    }
-    .tour-img { width: 100%; height: 160px; object-fit: cover; }
-    .tour-info { padding: 10px; }
-    .tour-name { font-family: 'Cormorant Garamond', serif; font-size: 15px; font-weight: 700; margin-bottom: 2px; }
-    .tour-desc { font-size: 10px; color: var(--text-dim); }
+<div class="concerto-app">
 
-    /* ─── BENTO GRID ─── */
-    .bento-grid { display: grid; grid-template-columns: 1fr 1fr; grid-auto-rows: 130px; gap: 12px; }
-    .bento-card {
-      background: var(--card-bg); border-radius: 22px; padding: 18px;
-      position: relative; overflow: hidden; border: 1px solid var(--border);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.02); display: flex; flex-direction: column; justify-content: space-between;
-    }
-    .bento-card:active { transform: scale(0.97); }
-    .bento-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 700; line-height: 1.1; }
-    .bento-sub { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-dim); }
-    
-    .span-2 { grid-column: span 2; }
-    .card-premium { background: var(--text); color: #fff; border: none; }
-    .card-premium .bento-title { color: #fff; font-size: 24px; }
-    .card-premium .bento-sub { color: var(--gold); }
-    .card-dark { background: var(--text); color: #fff; }
-    .card-dark .bento-title { color: #fff; }
+  <img src="https://buildfire.imgix.net/8ef92dbd-0a8b-11f0-a97f-12565309935d/img_0817.jpeg?width=2160&amp;height=2160" alt="Concerto Banner" style="width: 100%; display: block;" />
 
-    /* ─── TOOLKIT ─── */
-    .toolkit-card { background: var(--card-bg); border-radius: 28px; padding: 20px 0; border: 1px solid var(--border); }
-    .tool-pill { flex-shrink: 0; background: var(--bg); border-radius: 999px; padding: 12px 20px; font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--text); border: 1px solid var(--border); }
+  <div class="section-header" onclick="buildfire.actionItems.execute({ title: 'Featured Tours', action: 'linkToApp', instanceId: '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765328171752' }, () => {})">
+    <h2 class="section-title">Featured Tours</h2>
+    <div class="section-arrow">&rsaquo;</div>
+  </div>
 
-    /* ─── SOCIALS ─── */
-    .social-pill { background: var(--text); color: #fff; border-radius: 999px; padding: 14px 24px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; text-decoration: none; }
-
-    /* ─── MODAL ─── */
-    #show-modal { position: fixed; inset: 0; background: rgba(18,30,54, 0.4); backdrop-filter: blur(15px); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 20px; }
-    .modal-content { background: white; width: 100%; max-width: 340px; border-radius: 30px; padding: 30px; }
-    input { width: 100%; padding: 15px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 12px; font-family: 'DM Sans', sans-serif; font-size: 16px; outline: none; }
-    .save-btn { width: 100%; background: var(--text); color: white; padding: 15px; border-radius: 12px; font-weight: 700; text-transform: uppercase; border: none; cursor: pointer; }
-
-  </style>
-</head>
-<body>
-
-  <div id="show-modal">
-    <div class="modal-content">
-      <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 24px; margin-bottom: 20px;">Set Your Next Show</h3>
-      <input type="text" id="artist-input" placeholder="Artist or Team">
-      <input type="text" id="venue-input" placeholder="Venue & City">
-      <input type="datetime-local" id="date-input">
-      <button class="save-btn" onclick="saveShow()">Save Event</button>
-      <p onclick="closeModal()" style="text-align: center; margin-top: 15px; font-size: 11px; color: var(--text-dim); font-weight: 800; text-transform: uppercase; cursor: pointer;">Cancel</p>
+  <div class="h-scroll">
+    <div class="tour-card" onclick="buildfire.actionItems.execute({ title: 'Featured Tours', action: 'linkToApp', instanceId: '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765328171752' }, () => {})">
+      <img src="https://buildfire.imgix.net/8ef92dbd-0a8b-11f0-a97f-12565309935d/gaga.jpeg?auto=format&amp;fit=crop&amp;q=80&amp;w=400" class="tour-img" />
+      <div class="tour-info">
+        <h4 class="tour-name">Lady Gaga</h4>
+        <p class="tour-desc">The Mayhem Ball Tour</p>
+      </div>
+    </div>
+    <div class="tour-card" onclick="buildfire.actionItems.execute({ title: 'Featured Tours', action: 'linkToApp', instanceId: '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765328171752' }, () => {})">
+      <img src="https://buildfire.imgix.net/8ef92dbd-0a8b-11f0-a97f-12565309935d/img_4557.jpeg?auto=format&amp;fit=crop&amp;q=80&amp;w=400" class="tour-img" />
+      <div class="tour-info">
+        <h4 class="tour-name">Harry Styles</h4>
+        <p class="tour-desc">Together, Together Tour</p>
+      </div>
+    </div>
+    <div class="tour-card" onclick="buildfire.actionItems.execute({ title: 'Featured Tours', action: 'linkToApp', instanceId: '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765328171752' }, () => {})">
+      <img src="https://buildfire.imgix.net/8ef92dbd-0a8b-11f0-a97f-12565309935d/img_4552.jpeg?auto=format&amp;fit=crop&amp;q=80&amp;w=400" class="tour-img" />
+      <div class="tour-info">
+        <h4 class="tour-name">Conan Gray</h4>
+        <p class="tour-desc">Wishbone World Tour</p>
+      </div>
+    </div>
+    <div class="tour-card" onclick="buildfire.actionItems.execute({ title: 'Featured Tours', action: 'linkToApp', instanceId: '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765328171752' }, () => {})">
+      <img src="https://buildfire.imgix.net/8ef92dbd-0a8b-11f0-a97f-12565309935d/img_4554.jpeg?auto=format&amp;fit=crop&amp;q=80&amp;w=400" class="tour-img" />
+      <div class="tour-info">
+        <h4 class="tour-name">Ed Sheeran</h4>
+        <p class="tour-desc">The LOOP Tour</p>
+      </div>
     </div>
   </div>
 
-  <main class="dashboard">
-    <header class="app-header">
-      <img src="https://buildfire.imgix.net/8ef92dbd-0a8b-11f0-a97f-12565309935d/1767664539328.png" alt="Concerto Logo" class="main-logo">
-      <div class="add-event-btn" onclick="openModal()">+</div>
-    </header>
+  <div class="btn-grid">
+    <div class="btn-solid" data-execute="%7B%22title%22%3A%22Setlists%20%26%20Info%22%2C%22action%22%3A%22linkToApp%22%2C%22instanceId%22%3A%22169d5e94-6c5e-4769-b4ca-a7d0175985e7-1767642157588%22%7D" onclick="buildfire.actionItems.execute(JSON.parse(unescape(this.getAttribute('data-execute'))), () => {})">Setlists & Info</div>
+    <div class="btn-solid" data-execute="%7B%22title%22%3A%22Merch%20Locations%22%2C%22action%22%3A%22linkToApp%22%2C%22instanceId%22%3A%22ba4139dd-09c6-4121-aa4a-c72570af07fc-1745876476208%22%7D" onclick="buildfire.actionItems.execute(JSON.parse(unescape(this.getAttribute('data-execute'))), () => {})">Merch Locations</div>
+  </div>
 
-    <div class="up-next-card" onclick="openModal()">
-      <div class="up-next-tag">Countdown</div>
-      <h2 class="up-next-title" id="display-artist">Set Your Next Show</h2>
-      <div class="up-next-venue" id="display-venue">Tap to add your upcoming event</div>
-      <div class="countdown-row">
-        <div class="cd-box"><div class="cd-num" id="cd-days">00</div><div class="cd-label">Days</div></div>
-        <div class="cd-box"><div class="cd-num" id="cd-hours">00</div><div class="cd-label">Hrs</div></div>
-        <div class="cd-box"><div class="cd-num" id="cd-mins">00</div><div class="cd-label">Mins</div></div>
-        <div class="cd-box"><div class="cd-num" id="cd-secs">00</div><div class="cd-label">Secs</div></div>
-      </div>
-    </div>
+  <div class="section-header">
+    <h2 class="section-title">Concerto Premium</h2>
+    <div class="section-subtitle">Free 'til May 1</div>
+  </div>
 
-    <section>
-      <h2 class="section-title">Featured Tours</h2>
-      <div class="h-scroll">
-        <div class="tour-card scroll-item" onclick="routeTo('Featured Tours', '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765328171752')">
-          <img src="https://buildfire.imgix.net/8ef92dbd-0a8b-11f0-a97f-12565309935d/gaga.jpeg?auto=format&fit=crop&q=80&w=400" class="tour-img" />
-          <div class="tour-info"><div class="tour-name">Lady Gaga</div><div class="tour-desc">The Mayhem Ball</div></div>
-        </div>
-        <div class="tour-card scroll-item" onclick="routeTo('Featured Tours', '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765328171752')">
-          <img src="https://buildfire.imgix.net/8ef92dbd-0a8b-11f0-a97f-12565309935d/img_4557.jpeg?auto=format&fit=crop&q=80&w=400" class="tour-img" />
-          <div class="tour-info"><div class="tour-name">Harry Styles</div><div class="tour-desc">Together, Together</div></div>
-        </div>
-        <div class="tour-card scroll-item" onclick="routeTo('Featured Tours', '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765328171752')">
-          <img src="https://buildfire.imgix.net/8ef92dbd-0a8b-11f0-a97f-12565309935d/img_4552.jpeg?auto=format&fit=crop&q=80&w=400" class="tour-img" />
-          <div class="tour-info"><div class="tour-name">Conan Gray</div><div class="tour-desc">Wishbone World</div></div>
-        </div>
-      </div>
-    </section>
+  <div class="h-scroll">
+    <div class="pill-btn premium" onclick="buildfire.actionItems.execute({title:'Concerto+', action:'linkToApp', instanceId:'169d5e94-6c5e-4769-b4ca-a7d0175985e7-1753914028797'}, () => {})">Concerto+</div>
+    <div class="pill-btn premium" onclick="buildfire.actionItems.execute({title:'Bag Check', action:'linkToApp', instanceId:'169d5e94-6c5e-4769-b4ca-a7d0175985e7-1772922931812'}, () => {})">Bag Check</div>
+    <div class="pill-btn premium" onclick="buildfire.actionItems.execute({title:'Live Mode', action:'linkToApp', instanceId:'169d5e94-6c5e-4769-b4ca-a7d0175985e7-1772904343170'}, () => {})">Live Mode</div>
+    <div class="pill-btn premium" onclick="buildfire.actionItems.execute({title:'Festivals', action:'linkToApp', instanceId:'169d5e94-6c5e-4769-b4ca-a7d0175985e7-1766434667939'}, () => {})">Festivals</div>
+  </div>
 
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-      <div class="bento-card" style="height: 100px;" onclick="routeTo('Setlists & Info', '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1767642157588')">
-        <div class="bento-sub">The Music</div>
-        <h3 class="bento-title">Setlists</h3>
-      </div>
-      <div class="bento-card" style="height: 100px;" onclick="routeTo('Merch Locations', 'ba4139dd-09c6-4121-aa4a-c72570af07fc-1745876476208')">
-        <div class="bento-sub">The Drop</div>
-        <h3 class="bento-title">Merch Map</h3>
-      </div>
-    </div>
+  <div class="section-header">
+    <h2 class="section-title">Plan Your Night</h2>
+  </div>
+  <div class="btn-grid">
+    <div class="btn-solid" onclick="buildfire.actionItems.execute({ title: 'City Guides', action: 'linkToApp', instanceId: '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1764797790704' }, () => {})">City Guides</div>
+    <div class="btn-solid" onclick="buildfire.actionItems.execute({ title: 'Events Near Me', action: 'linkToApp', instanceId: '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1764709877985' }, () => {})">Events Near Me</div>
+  </div>
 
-    <div class="bento-grid">
-      <div class="bento-card span-2 card-premium" onclick="routeTo('Concerto+', '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1753914028797')">
-        <div class="bento-sub">Concerto Premium</div>
-        <h3 class="bento-title">Generate your<br>Concerto+ Itinerary.</h3>
-      </div>
-      <div class="bento-card" onclick="routeTo('Bag Check', '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1772922931812')">
-        <div class="bento-sub" style="color: var(--gold);">AI Tool</div>
-        <h3 class="bento-title">Bag Check</h3>
-      </div>
-      <div class="bento-card" onclick="routeTo('Live Mode', '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1772904343170')">
-        <div class="bento-sub" style="color: var(--gold);">In-Show</div>
-        <h3 class="bento-title">Live Mode</h3>
-      </div>
-      <div class="bento-card span-2 card-dark" style="height: 80px; flex-direction: row; align-items: center; justify-content: space-between;" onclick="routeTo('Festivals', '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1766434667939')">
-        <h3 class="bento-title" style="font-size: 20px;">Festival Logistics</h3>
-        <div class="bento-sub" style="color: var(--gold);">Premium</div>
-      </div>
-    </div>
+  <div class="section-header">
+    <h2 class="section-title">At The Venue</h2>
+  </div>
+  <div class="h-scroll">
+    <div class="pill-btn" data-execute="%7B%22title%22%3A%22Rideshare%22%2C%22action%22%3A%22linkToApp%22%2C%22instanceId%22%3A%22169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765237012145%22%7D" onclick="buildfire.actionItems.execute(JSON.parse(unescape(this.getAttribute('data-execute'))), () => {})">Rideshare</div>
+    <div class="pill-btn" data-execute="%7B%22title%22%3A%22Bag%20Policies%22%2C%22action%22%3A%22linkToApp%22%2C%22instanceId%22%3A%22169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765234047030%22%7D" onclick="buildfire.actionItems.execute(JSON.parse(unescape(this.getAttribute('data-execute'))), () => {})">Bag Policies</div>
+    <div class="pill-btn" data-execute="%7B%22title%22%3A%22Concessions%22%2C%22action%22%3A%22linkToApp%22%2C%22instanceId%22%3A%22169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765234072898%22%7D" onclick="buildfire.actionItems.execute(JSON.parse(unescape(this.getAttribute('data-execute'))), () => {})">Concessions</div>
+    <div class="pill-btn" data-execute="%7B%22title%22%3A%22Parking%22%2C%22action%22%3A%22linkToApp%22%2C%22instanceId%22%3A%22169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765234093628%22%7D" onclick="buildfire.actionItems.execute(JSON.parse(unescape(this.getAttribute('data-execute'))), () => {})">Parking</div>
+    <div class="pill-btn" data-execute="%7B%22title%22%3A%22Weather%22%2C%22action%22%3A%22linkToApp%22%2C%22instanceId%22%3A%220843baa9-8b51-4ba9-8357-7a114a69dd4e-1745352270979%22%7D" onclick="buildfire.actionItems.execute(JSON.parse(unescape(this.getAttribute('data-execute'))), () => {})">Weather</div>
+  </div>
 
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-      <div class="bento-card" onclick="routeTo('City Guides', '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1764797790704')">
-        <div class="bento-sub">Explore</div>
-        <h3 class="bento-title">City Guides</h3>
-      </div>
-      <div class="bento-card" onclick="routeTo('Events Near Me', '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1764709877985')">
-        <div class="bento-sub">Spontaneous</div>
-        <h3 class="bento-title">Near Me</h3>
-      </div>
-    </div>
-
-    <div class="toolkit-card">
-      <div style="padding: 0 20px 10px; font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 700;">Venue Toolkit</div>
-      <div class="h-scroll">
-        <div class="tool-pill scroll-item" onclick="routeTo('Rideshare', '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765237012145')">Rideshare</div>
-        <div class="tool-pill scroll-item" onclick="routeTo('Parking', '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765234093628')">Parking</div>
-        <div class="tool-pill scroll-item" onclick="routeTo('Bag Policies', '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765234047030')">Bag Policy</div>
-        <div class="tool-pill scroll-item" onclick="routeTo('Concessions', '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765234072898')">Concessions</div>
-        <div class="tool-pill scroll-item" onclick="routeTo('Weather', '0843baa9-8b51-4ba9-8357-7a114a69dd4e-1745352270979')">Weather</div>
-      </div>
-    </div>
-
+  <div class="section-header">
     <h2 class="section-title">Follow Us</h2>
-    <div class="h-scroll">
-      <a href="https://instagram.com/theconcertoapp" target="_blank" class="social-pill scroll-item">Instagram</a>
-      <a href="https://tiktok.com/@theconcertoapp" target="_blank" class="social-pill scroll-item">TikTok</a>
-      <a href="https://youtube.com/@theconcertoapp" target="_blank" class="social-pill scroll-item">YouTube</a>
-    </div>
+  </div>
+  <div class="h-scroll" style="padding-bottom: 20px;">
+    <a href="https://www.instagram.com/theconcertoapp?igsh=MTlyajFxaTNqOTM0YQ==" target="_blank" rel="noopener" style="text-decoration: none;">
+      <div class="pill-btn dark">Instagram</div>
+    </a>
+    <a href="https://www.tiktok.com/@theconcertoapp?_r=1&amp;_t=ZP-91GlDczEUU3" target="_blank" rel="noopener" style="text-decoration: none;">
+      <div class="pill-btn dark">TikTok</div>
+    </a>
+    <a href="https://youtube.com/@theconcertoapp?si=mBZpedlQ0t73PJ3F" target="_blank" rel="noopener" style="text-decoration: none;">
+      <div class="pill-btn dark">YouTube</div>
+    </a>
+  </div>
 
-    <p style="text-align: center; font-size: 9px; color: var(--text-dim); padding-top: 20px; line-height: 1.5;">Concerto is an independent platform not affiliated with or endorsed by any artist, team, or venue.</p>
-  </main>
+  <div class="disclaimer">
+    Concerto is an independent platform, not affiliated with or endorsed by any artist, band, team, league, venue, or promoter. 
+    <br><br>
+    <a href="#" onclick="buildfire.actionItems.execute({ title: 'About Us', action: 'linkToApp', instanceId: '03dd5856-99ed-4950-ad40-6d95a29ef7f2-1663277024487' }, () => {})">Learn more</a>
+  </div>
 
-  <script>
-    function routeTo(title, instanceId) {
-      if (typeof buildfire !== 'undefined' && buildfire.actionItems) {
-        buildfire.actionItems.execute({title: title, action: 'linkToApp', instanceId: instanceId}, () => {});
-      }
-    }
-    function openModal() { document.getElementById('show-modal').style.display = 'flex'; }
-    function closeModal() { document.getElementById('show-modal').style.display = 'none'; }
-    function saveShow() {
-      const art = document.getElementById('artist-input').value;
-      const ven = document.getElementById('venue-input').value;
-      const dat = document.getElementById('date-input').value;
-      if(art && dat) {
-        localStorage.setItem('c_art', art); localStorage.setItem('c_ven', ven); localStorage.setItem('c_dat', dat);
-        loadShow(); closeModal();
-      }
-    }
-    function loadShow() {
-      const art = localStorage.getItem('c_art'), ven = localStorage.getItem('c_ven'), dat = localStorage.getItem('c_dat');
-      if(art && dat) {
-        document.getElementById('display-artist').innerText = art;
-        document.getElementById('display-venue').innerText = ven || "Venue TBD";
-        const target = new Date(dat).getTime();
-        setInterval(() => {
-          const now = new Date().getTime(), diff = target - now;
-          if(diff < 0) return;
-          document.getElementById('cd-days').innerText = Math.floor(diff / 86400000).toString().padStart(2,'0');
-          document.getElementById('cd-hours').innerText = Math.floor((diff % 86400000) / 3600000).toString().padStart(2,'0');
-          document.getElementById('cd-mins').innerText = Math.floor((diff % 3600000) / 60000).toString().padStart(2,'0');
-          document.getElementById('cd-secs').innerText = Math.floor((diff % 60000) / 1000).toString().padStart(2,'0');
-        }, 1000);
-      }
-    }
-    loadShow();
-  </script>
-</body>
-</html>
+</div>
