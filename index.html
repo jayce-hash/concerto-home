@@ -24,137 +24,132 @@
       -webkit-touch-callout: none;
       overflow-x: hidden;
     }
-    a { text-decoration: none; color: inherit; }
+    a { text-decoration: none; color: inherit; display: block; }
 
-    /* ─── FLOATING HEADER ─── */
+    /* ─── FLOATING HEADER (IPHONE SAFE) ─── */
     header {
       position: fixed; top: 0; left: 0; width: 100%;
-      display: flex; justify-content: center; align-items: center;
-      padding: 20px 20px 15px;
-      background: rgba(248, 249, 249, 0.9);
-      backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+      height: calc(env(safe-area-inset-top, 44px) + 60px);
+      display: flex; justify-content: center; align-items: flex-end;
+      padding-bottom: 12px;
+      background: rgba(248, 249, 249, 0.95);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
       z-index: 100; border-bottom: 1px solid rgba(18, 30, 54, 0.05);
-      padding-top: env(safe-area-inset-top, 44px);
     }
-    .logo {
-      font-family: 'Playfair Display', serif; font-size: 20px; 
-      font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    .header-logo {
+      height: 28px; /* Perfectly sized to not dominate the screen */
+      object-fit: contain;
+      mix-blend-mode: multiply; /* Makes white background transparent */
     }
 
     /* ─── MAIN CONTENT ─── */
     main {
-      padding-top: calc(env(safe-area-inset-top, 44px) + 70px);
+      padding-top: calc(env(safe-area-inset-top, 44px) + 85px);
       padding-bottom: 60px;
     }
     .container { padding: 0 20px; }
 
+    .section-header {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      margin-bottom: 12px;
+    }
     .section-title {
-      font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700;
-      letter-spacing: -0.01em; margin-bottom: 4px; color: #121E36;
+      font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700;
+      letter-spacing: -0.01em; color: #121E36; line-height: 1;
     }
     .section-subtitle {
-      font-size: 10px; font-weight: 700; letter-spacing: 0.15em; 
-      color: #C9A84C; text-transform: uppercase; margin-bottom: 16px; display: block;
+      font-size: 9px; font-weight: 700; letter-spacing: 0.15em; 
+      color: #C9A84C; text-transform: uppercase; line-height: 1;
     }
 
-    /* ─── HERO COUNTDOWN CARD ─── */
+    /* ─── SLEEK HERO COUNTDOWN ─── */
     .hero-card {
       background: #121E36; color: #FFFFFF; border-radius: 20px;
-      padding: 30px 25px; box-shadow: 0 12px 35px rgba(18, 30, 54, 0.2);
-      margin-bottom: 40px; position: relative; overflow: hidden;
+      padding: 24px; box-shadow: 0 12px 30px rgba(18, 30, 54, 0.15);
+      margin-bottom: 32px; position: relative; overflow: hidden;
+      display: flex; flex-direction: column; gap: 20px;
     }
-    /* Subtle background glow for depth */
+    /* Gold Accent Glow */
     .hero-card::before {
-      content: ''; position: absolute; top: -50px; right: -50px;
-      width: 150px; height: 150px; background: rgba(201, 168, 76, 0.15);
-      filter: blur(40px); border-radius: 50%; pointer-events: none;
+      content: ''; position: absolute; top: -40px; right: -40px;
+      width: 120px; height: 120px; background: rgba(201, 168, 76, 0.2);
+      filter: blur(35px); border-radius: 50%; pointer-events: none;
     }
+    
+    .hero-top { z-index: 1; }
     .hero-eyebrow {
-      font-size: 10px; font-weight: 700; letter-spacing: 0.2em;
-      color: #C9A84C; text-transform: uppercase; margin-bottom: 20px; display: block;
+      font-size: 9px; font-weight: 700; letter-spacing: 0.2em;
+      color: #C9A84C; text-transform: uppercase; margin-bottom: 8px; display: block;
     }
     .hero-artist {
-      font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700;
+      font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700;
       line-height: 1.1; margin-bottom: 4px;
     }
     .hero-tour {
-      font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.6);
-      text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 30px;
+      font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.6);
+      letter-spacing: 0.02em;
     }
     
-    /* The Timer */
-    .timer-row {
-      display: flex; gap: 15px; align-items: baseline; margin-bottom: 25px;
+    .timer-wrap {
+      display: flex; align-items: center; justify-content: space-between; z-index: 1;
+      background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px; padding: 12px 20px;
     }
-    .time-block { display: flex; flex-direction: column; }
-    .time-num {
-      font-family: 'Playfair Display', serif; font-size: 38px; font-weight: 700; line-height: 1;
-    }
-    .time-label {
-      font-size: 9px; font-weight: 700; letter-spacing: 0.1em; color: rgba(255,255,255,0.4);
-      text-transform: uppercase; margin-top: 4px;
-    }
-    .time-colon {
-      font-family: 'Playfair Display', serif; font-size: 24px; color: rgba(201, 168, 76, 0.5);
-      transform: translateY(-8px);
-    }
+    .timer-row { display: flex; gap: 16px; align-items: baseline; }
+    .time-block { display: flex; flex-direction: column; align-items: center; }
+    .time-num { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; line-height: 1; }
+    .time-label { font-size: 8px; font-weight: 700; letter-spacing: 0.1em; color: rgba(255,255,255,0.4); text-transform: uppercase; margin-top: 4px; }
+    .time-colon { font-family: 'Playfair Display', serif; font-size: 18px; color: rgba(201, 168, 76, 0.5); transform: translateY(-6px); }
     
-    .hero-btn {
-      display: inline-block; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 999px; padding: 12px 24px; font-size: 11px; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 0.1em; color: #FFFFFF;
-      transition: background 0.2s; cursor: pointer;
-    }
-    .hero-btn:active { background: rgba(255,255,255,0.2); }
+    .hero-arrow { color: #C9A84C; font-size: 20px; line-height: 1; font-weight: 300; }
 
-    /* ─── PREMIUM BENTO GRID ─── */
-    .premium-header { margin-bottom: 20px; }
-    
-    .bento-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 40px;
+    /* ─── PREMIUM BENTO (TIGHT & COMPACT) ─── */
+    .premium-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 32px;
     }
-    .bento-item {
+    .premium-item {
       background: #FFFFFF; border: 1px solid rgba(201, 168, 76, 0.3);
-      border-radius: 16px; padding: 22px 18px;
+      border-radius: 16px; padding: 16px 14px;
       display: flex; flex-direction: column; justify-content: center;
-      aspect-ratio: 1/1; box-shadow: 0 6px 20px rgba(18, 30, 54, 0.03);
-      transition: transform 0.2s; cursor: pointer;
+      height: 90px; /* Forces compact height to save scroll space */
+      box-shadow: 0 4px 15px rgba(18, 30, 54, 0.02);
+      transition: transform 0.2s;
     }
-    .bento-item:active { transform: scale(0.96); box-shadow: 0 2px 10px rgba(18, 30, 54, 0.02); }
+    .premium-item:active { transform: scale(0.96); background: rgba(201, 168, 76, 0.02); }
     
-    .bento-title {
-      font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700;
-      line-height: 1.1; color: #121E36; margin-bottom: 8px;
+    .premium-title {
+      font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700;
+      color: #121E36; margin-bottom: 4px; display: flex; align-items: center; justify-content: space-between;
     }
-    .bento-desc {
-      font-size: 11px; font-weight: 500; color: rgba(18, 30, 54, 0.55); line-height: 1.4;
+    /* Adds a tiny gold dot to signify premium */
+    .premium-title::after { content: '•'; color: #C9A84C; font-size: 14px; }
+    .premium-desc {
+      font-size: 10px; font-weight: 500; color: rgba(18, 30, 54, 0.5); line-height: 1.3;
     }
 
-    /* ─── THE ESSENTIALS (FREE FEATURES) ─── */
-    .essentials-header { margin-bottom: 16px; }
-    
-    .list-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+    /* ─── THE ESSENTIALS (CLEAN LIST GRID) ─── */
+    .essentials-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 24px;
     }
-    .list-btn {
-      background: rgba(18, 30, 54, 0.03); border: 1px solid rgba(18, 30, 54, 0.08);
-      border-radius: 12px; padding: 16px 14px;
-      font-size: 12px; font-weight: 700; color: #121E36;
+    .essential-btn {
+      background: rgba(18, 30, 54, 0.03); border: 1px solid rgba(18, 30, 54, 0.06);
+      border-radius: 12px; padding: 14px 14px;
+      font-size: 11px; font-weight: 700; color: #121E36;
       text-transform: uppercase; letter-spacing: 0.05em;
-      transition: transform 0.2s, background 0.2s; cursor: pointer;
+      transition: transform 0.2s, background 0.2s;
       display: flex; align-items: center; justify-content: space-between;
     }
-    .list-btn:active { transform: scale(0.97); background: rgba(18, 30, 54, 0.06); }
-    .list-arrow { color: rgba(18, 30, 54, 0.3); font-size: 16px; line-height: 1; }
+    .essential-btn:active { transform: scale(0.97); background: rgba(18, 30, 54, 0.06); }
+    .essential-arrow { color: rgba(18, 30, 54, 0.3); font-size: 16px; line-height: 1; font-weight: 300; }
 
-    /* Deep Links Row (Weather / Support) */
+    /* ─── UTILITIES ─── */
     .utility-row {
-      display: flex; gap: 10px; margin-top: 10px;
+      display: flex; gap: 8px;
     }
     .utility-btn {
-      flex: 1; background: transparent; border: 1px solid rgba(18, 30, 54, 0.2);
+      flex: 1; background: transparent; border: 1px solid rgba(18, 30, 54, 0.15);
       border-radius: 999px; padding: 12px; text-align: center;
-      font-size: 10px; font-weight: 700; color: #121E36;
+      font-size: 9px; font-weight: 700; color: rgba(18, 30, 54, 0.6);
       text-transform: uppercase; letter-spacing: 0.1em;
     }
     .utility-btn:active { background: rgba(18, 30, 54, 0.05); }
@@ -164,82 +159,81 @@
 <body>
 
   <header>
-    <div class="logo">Concerto</div>
+    <img src="YOUR_LOGO_URL_HERE.png" alt="CONCERTO" class="header-logo">
   </header>
 
   <main>
     <div class="container">
       
-      <div class="hero-card">
-        <span class="hero-eyebrow">Your Next Event</span>
-        <h3 class="hero-artist">Lady Gaga</h3>
-        <p class="hero-tour">The Mayhem Ball Tour • Soldier Field</p>
-        
-        <div class="timer-row">
-          <div class="time-block">
-            <span class="time-num" id="days">42</span>
-            <span class="time-label">Days</span>
-          </div>
-          <div class="time-colon">:</div>
-          <div class="time-block">
-            <span class="time-num" id="hours">14</span>
-            <span class="time-label">Hrs</span>
-          </div>
-          <div class="time-colon">:</div>
-          <div class="time-block">
-            <span class="time-num" id="mins">30</span>
-            <span class="time-label">Min</span>
-          </div>
+      <a href="/itinerary" class="hero-card">
+        <div class="hero-top">
+          <span class="hero-eyebrow">Your Next Event</span>
+          <h3 class="hero-artist">Lady Gaga</h3>
+          <p class="hero-tour">The Mayhem Ball Tour • Soldier Field</p>
         </div>
+        
+        <div class="timer-wrap">
+          <div class="timer-row">
+            <div class="time-block">
+              <span class="time-num" id="days">42</span>
+              <span class="time-label">Days</span>
+            </div>
+            <div class="time-colon">:</div>
+            <div class="time-block">
+              <span class="time-num" id="hours">14</span>
+              <span class="time-label">Hrs</span>
+            </div>
+            <div class="time-colon">:</div>
+            <div class="time-block">
+              <span class="time-num" id="mins">30</span>
+              <span class="time-label">Min</span>
+            </div>
+          </div>
+          <span class="hero-arrow">&rsaquo;</span>
+        </div>
+      </a>
 
-        <a href="https://your-itinerary-link.com" class="hero-btn">Manage Details</a>
-      </div>
-
-      <div class="premium-header">
+      <div class="section-header">
         <h2 class="section-title">Concerto Premium</h2>
         <span class="section-subtitle">Unlock The Magic</span>
       </div>
 
-      <div class="bento-grid">
-        <a href="https://your-concerto-plus-link.com" class="bento-item">
-          <h4 class="bento-title">Concerto+</h4>
-          <p class="bento-desc">Your personalized AI timeline and itinerary builder.</p>
+      <div class="premium-grid">
+        <a href="/concerto-plus" class="premium-item">
+          <h4 class="premium-title">Concerto+</h4>
+          <p class="premium-desc">Your AI timeline and custom itinerary.</p>
         </a>
-
-        <a href="https://your-bag-check-link.com" class="bento-item">
-          <h4 class="bento-title">Bag Check</h4>
-          <p class="bento-desc">Instant camera verification for venue policies.</p>
+        <a href="/bag-check" class="premium-item">
+          <h4 class="premium-title">Bag Check</h4>
+          <p class="premium-desc">Instant camera verification for venues.</p>
         </a>
-
-        <a href="https://your-live-mode-link.com" class="bento-item">
-          <h4 class="bento-title">Live Mode</h4>
-          <p class="bento-desc">In-show hub and personalized story recaps.</p>
+        <a href="/live-mode" class="premium-item">
+          <h4 class="premium-title">Live Mode</h4>
+          <p class="premium-desc">In-show hub and personalized recaps.</p>
         </a>
-
-        <a href="https://your-festivals-link.com" class="bento-item">
-          <h4 class="bento-title">Festivals</h4>
-          <p class="bento-desc">Multi-day lineups, maps, and survival intel.</p>
+        <a href="/festivals" class="premium-item">
+          <h4 class="premium-title">Festivals</h4>
+          <p class="premium-desc">Multi-day lineups and survival intel.</p>
         </a>
       </div>
 
-      <div class="essentials-header">
+      <div class="section-header">
         <h2 class="section-title">The Essentials</h2>
-        <span class="section-subtitle" style="color: rgba(18,30,54,0.4);">Included for all fans</span>
       </div>
 
-      <div class="list-grid">
-        <a href="https://link-to-city-guides.com" class="list-btn">City Guides <span class="list-arrow">&rsaquo;</span></a>
-        <a href="https://link-to-events-near-me.com" class="list-btn">Events Near Me <span class="list-arrow">&rsaquo;</span></a>
-        <a href="https://link-to-setlists.com" class="list-btn">Setlists & Info <span class="list-arrow">&rsaquo;</span></a>
-        <a href="https://link-to-merch.com" class="list-btn">Merch Locator <span class="list-arrow">&rsaquo;</span></a>
-        <a href="https://link-to-rideshare.com" class="list-btn">Rideshare <span class="list-arrow">&rsaquo;</span></a>
-        <a href="https://link-to-bag-policies.com" class="list-btn">Bag Policies <span class="list-arrow">&rsaquo;</span></a>
-        <a href="https://link-to-parking.com" class="list-btn">Parking <span class="list-arrow">&rsaquo;</span></a>
-        <a href="https://link-to-concessions.com" class="list-btn">Concessions <span class="list-arrow">&rsaquo;</span></a>
+      <div class="essentials-grid">
+        <a href="/city-guides" class="essential-btn">City Guides <span class="essential-arrow">&rsaquo;</span></a>
+        <a href="/events" class="essential-btn">Events Near Me <span class="essential-arrow">&rsaquo;</span></a>
+        <a href="/setlists" class="essential-btn">Setlists & Info <span class="essential-arrow">&rsaquo;</span></a>
+        <a href="/merch" class="essential-btn">Merch Locator <span class="essential-arrow">&rsaquo;</span></a>
+        <a href="/rideshare" class="essential-btn">Rideshare <span class="essential-arrow">&rsaquo;</span></a>
+        <a href="/bag-policies" class="essential-btn">Bag Policies <span class="essential-arrow">&rsaquo;</span></a>
+        <a href="/parking" class="essential-btn">Parking Maps <span class="essential-arrow">&rsaquo;</span></a>
+        <a href="/concessions" class="essential-btn">Concessions <span class="essential-arrow">&rsaquo;</span></a>
       </div>
 
       <div class="utility-row">
-        <a href="https://link-to-weather.com" class="utility-btn">Local Weather</a>
+        <a href="/weather" class="utility-btn">Local Weather</a>
         <a href="mailto:support@concertocity.com" class="utility-btn">App Support</a>
       </div>
 
@@ -247,7 +241,7 @@
   </main>
 
   <script>
-    // Set a mock date 42 days in the future for the demo
+    // Live Timer Engine (Demo set to 42 Days out)
     const eventDate = new Date();
     eventDate.setDate(eventDate.getDate() + 42);
     eventDate.setHours(eventDate.getHours() + 14);
@@ -262,16 +256,14 @@
         const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
         const m = Math.floor((diff / 1000 / 60) % 60);
 
-        // Format to always show two digits (e.g., "08" instead of "8")
         document.getElementById('days').innerText = d.toString().padStart(2, '0');
         document.getElementById('hours').innerText = h.toString().padStart(2, '0');
         document.getElementById('mins').innerText = m.toString().padStart(2, '0');
       }
     }
 
-    // Run immediately, then every 60 seconds (since we aren't showing seconds)
     updateTimer();
-    setInterval(updateTimer, 60000);
+    setInterval(updateTimer, 60000); // Updates every minute
   </script>
 
 </body>
