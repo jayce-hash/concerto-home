@@ -1,351 +1,351 @@
-<!DOCTYPE html>
+Not missing anything from this code, right? <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Concerto App Home</title>
-  
-  <script src="https://app.buildfire.com/scripts/buildfire.js"></script>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Concerto App Home</title>
+  
+  <script src="https://app.buildfire.com/scripts/buildfire.js"></script>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <style>
-    /* ─── NATIVE APP RESET ─── */
-    * { 
-      margin: 0; padding: 0; box-sizing: border-box; 
-      -webkit-tap-highlight-color: transparent; 
-    }
-    body {
-      background-color: #F8F9F9;
-      color: #121E36;
-      font-family: 'DM Sans', sans-serif;
-      -webkit-font-smoothing: antialiased;
-      user-select: none; 
-      -webkit-touch-callout: none;
-      overflow-x: hidden;
-    }
-    a { text-decoration: none; color: inherit; display: block; }
-    
-    /* Added transition so you can visually see when a tap registers */
-    .bf-click { cursor: pointer; display: block; transition: transform 0.15s ease; }
-    .bf-click:active { transform: scale(0.96); }
+  <style>
+    /* ─── NATIVE APP RESET ─── */
+    * { 
+      margin: 0; padding: 0; box-sizing: border-box; 
+      -webkit-tap-highlight-color: transparent; 
+    }
+    body {
+      background-color: #F8F9F9;
+      color: #121E36;
+      font-family: 'DM Sans', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      user-select: none; 
+      -webkit-touch-callout: none;
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; display: block; }
+    
+    /* Added transition so you can visually see when a tap registers */
+    .bf-click { cursor: pointer; display: block; transition: transform 0.15s ease; }
+    .bf-click:active { transform: scale(0.96); }
 
-    /* ─── STICKY HEADER (FIXES THE INVISIBLE SHIELD CLICK BUG) ─── */
-    header {
-      position: sticky; top: 0; width: 100%;
-      background: rgba(248, 249, 249, 0.95);
-      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-      z-index: 1000; border-bottom: 1px solid rgba(18, 30, 54, 0.05);
-      padding-top: max(env(safe-area-inset-top), 40px);
-      padding-bottom: 15px;
-      display: flex; justify-content: center; align-items: flex-end;
-    }
-    .header-logo {
-      width: 240px; /* Made the logo much larger */
-      height: auto; 
-      object-fit: contain;
-      mix-blend-mode: multiply; 
-      display: block;
-    }
+    /* ─── STICKY HEADER (FIXES THE INVISIBLE SHIELD CLICK BUG) ─── */
+    header {
+      position: sticky; top: 0; width: 100%;
+      background: rgba(248, 249, 249, 0.95);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      z-index: 1000; border-bottom: 1px solid rgba(18, 30, 54, 0.05);
+      padding-top: max(env(safe-area-inset-top), 40px);
+      padding-bottom: 15px;
+      display: flex; justify-content: center; align-items: flex-end;
+    }
+    .header-logo {
+      width: 240px; /* Made the logo much larger */
+      height: auto; 
+      object-fit: contain;
+      mix-blend-mode: multiply; 
+      display: block;
+    }
 
-    /* ─── MAIN CONTENT ─── */
-    main {
-      padding: 20px 0 60px; /* Simplified padding because header is sticky */
-    }
-    .container { padding: 0 20px; }
+    /* ─── MAIN CONTENT ─── */
+    main {
+      padding: 20px 0 60px; /* Simplified padding because header is sticky */
+    }
+    .container { padding: 0 20px; }
 
-    .section-header {
-      display: flex; justify-content: space-between; align-items: flex-end;
-      margin-bottom: 12px;
-    }
-    .section-title {
-      font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700;
-      letter-spacing: -0.01em; color: #121E36; line-height: 1;
-    }
-    .section-subtitle {
-      font-size: 9px; font-weight: 700; letter-spacing: 0.15em; 
-      color: #C9A84C; text-transform: uppercase; line-height: 1;
-    }
+    .section-header {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700;
+      letter-spacing: -0.01em; color: #121E36; line-height: 1;
+    }
+    .section-subtitle {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.15em; 
+      color: #C9A84C; text-transform: uppercase; line-height: 1;
+    }
 
-    /* ─── SLEEK HERO COUNTDOWN ─── */
-    .hero-card {
-      background: #121E36; color: #FFFFFF; border-radius: 20px;
-      padding: 24px; box-shadow: 0 12px 30px rgba(18, 30, 54, 0.15);
-      margin-bottom: 32px; position: relative; overflow: hidden;
-      display: flex; flex-direction: column; gap: 20px;
-    }
-    .hero-card::before {
-      content: ''; position: absolute; top: -40px; right: -40px;
-      width: 120px; height: 120px; background: rgba(201, 168, 76, 0.2);
-      filter: blur(35px); border-radius: 50%; pointer-events: none;
-    }
-    
-    .hero-top { z-index: 1; }
-    .hero-eyebrow {
-      font-size: 9px; font-weight: 700; letter-spacing: 0.2em;
-      color: #C9A84C; text-transform: uppercase; margin-bottom: 8px; display: block;
-    }
-    .hero-artist {
-      font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700;
-      line-height: 1.1; margin-bottom: 4px;
-    }
-    .hero-tour {
-      font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.6);
-      letter-spacing: 0.02em;
-    }
-    
-    .timer-wrap {
-      display: flex; align-items: center; justify-content: space-between; z-index: 1;
-      background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 12px; padding: 12px 20px;
-    }
-    .timer-row { display: flex; gap: 16px; align-items: baseline; }
-    .time-block { display: flex; flex-direction: column; align-items: center; }
-    .time-num { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; line-height: 1; }
-    .time-label { font-size: 8px; font-weight: 700; letter-spacing: 0.1em; color: rgba(255,255,255,0.4); text-transform: uppercase; margin-top: 4px; }
-    .time-colon { font-family: 'Playfair Display', serif; font-size: 18px; color: rgba(201, 168, 76, 0.5); transform: translateY(-6px); }
-    .hero-arrow { color: #C9A84C; font-size: 20px; line-height: 1; font-weight: 300; }
+    /* ─── SLEEK HERO COUNTDOWN ─── */
+    .hero-card {
+      background: #121E36; color: #FFFFFF; border-radius: 20px;
+      padding: 24px; box-shadow: 0 12px 30px rgba(18, 30, 54, 0.15);
+      margin-bottom: 32px; position: relative; overflow: hidden;
+      display: flex; flex-direction: column; gap: 20px;
+    }
+    .hero-card::before {
+      content: ''; position: absolute; top: -40px; right: -40px;
+      width: 120px; height: 120px; background: rgba(201, 168, 76, 0.2);
+      filter: blur(35px); border-radius: 50%; pointer-events: none;
+    }
+    
+    .hero-top { z-index: 1; }
+    .hero-eyebrow {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.2em;
+      color: #C9A84C; text-transform: uppercase; margin-bottom: 8px; display: block;
+    }
+    .hero-artist {
+      font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700;
+      line-height: 1.1; margin-bottom: 4px;
+    }
+    .hero-tour {
+      font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.6);
+      letter-spacing: 0.02em;
+    }
+    
+    .timer-wrap {
+      display: flex; align-items: center; justify-content: space-between; z-index: 1;
+      background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px; padding: 12px 20px;
+    }
+    .timer-row { display: flex; gap: 16px; align-items: baseline; }
+    .time-block { display: flex; flex-direction: column; align-items: center; }
+    .time-num { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; line-height: 1; }
+    .time-label { font-size: 8px; font-weight: 700; letter-spacing: 0.1em; color: rgba(255,255,255,0.4); text-transform: uppercase; margin-top: 4px; }
+    .time-colon { font-family: 'Playfair Display', serif; font-size: 18px; color: rgba(201, 168, 76, 0.5); transform: translateY(-6px); }
+    .hero-arrow { color: #C9A84C; font-size: 20px; line-height: 1; font-weight: 300; }
 
-    /* ─── FEATURED TOURS CAROUSEL ─── */
-    .tour-scroll {
-      display: flex; overflow-x: auto; gap: 12px; margin-bottom: 32px;
-      scrollbar-width: none; -webkit-overflow-scrolling: touch;
-      padding-bottom: 5px; 
-    }
-    .tour-scroll::-webkit-scrollbar { display: none; }
+    /* ─── FEATURED TOURS CAROUSEL ─── */
+    .tour-scroll {
+      display: flex; overflow-x: auto; gap: 12px; margin-bottom: 32px;
+      scrollbar-width: none; -webkit-overflow-scrolling: touch;
+      padding-bottom: 5px; 
+    }
+    .tour-scroll::-webkit-scrollbar { display: none; }
 
-    .tour-card {
-      flex: 0 0 125px; background: #FFFFFF; border: 1px solid rgba(18, 30, 54, 0.06);
-      border-radius: 14px; box-shadow: 0 4px 12px rgba(18, 30, 54, 0.03);
-      overflow: hidden; transition: transform 0.2s;
-    }
-    .tour-img { width: 100%; height: 140px; object-fit: cover; display: block; pointer-events: none; }
-    .tour-info { padding: 10px; pointer-events: none; }
-    .tour-name { 
-      font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 700; 
-      margin-bottom: 2px; color: #121E36; line-height: 1.1; 
-    }
-    .tour-desc { 
-      font-size: 9px; color: rgba(18, 30, 54, 0.5); line-height: 1.3;
-    }
+    .tour-card {
+      flex: 0 0 125px; background: #FFFFFF; border: 1px solid rgba(18, 30, 54, 0.06);
+      border-radius: 14px; box-shadow: 0 4px 12px rgba(18, 30, 54, 0.03);
+      overflow: hidden; transition: transform 0.2s;
+    }
+    .tour-img { width: 100%; height: 140px; object-fit: cover; display: block; pointer-events: none; }
+    .tour-info { padding: 10px; pointer-events: none; }
+    .tour-name { 
+      font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 700; 
+      margin-bottom: 2px; color: #121E36; line-height: 1.1; 
+    }
+    .tour-desc { 
+      font-size: 9px; color: rgba(18, 30, 54, 0.5); line-height: 1.3;
+    }
 
-    /* ─── PREMIUM BENTO ─── */
-    .premium-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 32px;
-    }
-    .premium-item {
-      background: #FFFFFF; border: 1px solid rgba(201, 168, 76, 0.3);
-      border-radius: 16px; padding: 16px 14px;
-      display: flex; flex-direction: column; justify-content: center;
-      height: 90px; 
-      box-shadow: 0 4px 15px rgba(18, 30, 54, 0.02);
-      transition: transform 0.2s;
-    }
-    .premium-item:active { background: rgba(201, 168, 76, 0.02); }
-    
-    .premium-title {
-      font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700;
-      color: #121E36; margin-bottom: 4px; display: flex; align-items: center; justify-content: space-between;
-    }
-    .premium-title::after { content: '•'; color: #C9A84C; font-size: 14px; }
-    .premium-desc {
-      font-size: 10px; font-weight: 500; color: rgba(18, 30, 54, 0.5); line-height: 1.3;
-    }
+    /* ─── PREMIUM BENTO ─── */
+    .premium-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 32px;
+    }
+    .premium-item {
+      background: #FFFFFF; border: 1px solid rgba(201, 168, 76, 0.3);
+      border-radius: 16px; padding: 16px 14px;
+      display: flex; flex-direction: column; justify-content: center;
+      height: 90px; 
+      box-shadow: 0 4px 15px rgba(18, 30, 54, 0.02);
+      transition: transform 0.2s;
+    }
+    .premium-item:active { background: rgba(201, 168, 76, 0.02); }
+    
+    .premium-title {
+      font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700;
+      color: #121E36; margin-bottom: 4px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .premium-title::after { content: '•'; color: #C9A84C; font-size: 14px; }
+    .premium-desc {
+      font-size: 10px; font-weight: 500; color: rgba(18, 30, 54, 0.5); line-height: 1.3;
+    }
 
-    /* ─── THE ESSENTIALS ─── */
-    .essentials-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 24px;
-    }
-    .essential-btn {
-      background: rgba(18, 30, 54, 0.03); border: 1px solid rgba(18, 30, 54, 0.06);
-      border-radius: 12px; padding: 14px 14px;
-      font-size: 11px; font-weight: 700; color: #121E36;
-      text-transform: uppercase; letter-spacing: 0.05em;
-      transition: transform 0.2s, background 0.2s;
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .essential-btn:active { background: rgba(18, 30, 54, 0.06); }
-    .essential-arrow { color: rgba(18, 30, 54, 0.3); font-size: 16px; line-height: 1; font-weight: 300; }
+    /* ─── THE ESSENTIALS ─── */
+    .essentials-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 24px;
+    }
+    .essential-btn {
+      background: rgba(18, 30, 54, 0.03); border: 1px solid rgba(18, 30, 54, 0.06);
+      border-radius: 12px; padding: 14px 14px;
+      font-size: 11px; font-weight: 700; color: #121E36;
+      text-transform: uppercase; letter-spacing: 0.05em;
+      transition: transform 0.2s, background 0.2s;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .essential-btn:active { background: rgba(18, 30, 54, 0.06); }
+    .essential-arrow { color: rgba(18, 30, 54, 0.3); font-size: 16px; line-height: 1; font-weight: 300; }
 
-    /* ─── UTILITIES ─── */
-    .utility-row { display: flex; gap: 8px; }
-    .utility-btn {
-      flex: 1; background: transparent; border: 1px solid rgba(18, 30, 54, 0.15);
-      border-radius: 999px; padding: 12px; text-align: center;
-      font-size: 9px; font-weight: 700; color: rgba(18, 30, 54, 0.6);
-      text-transform: uppercase; letter-spacing: 0.1em;
-    }
-    .utility-btn:active { background: rgba(18, 30, 54, 0.05); }
+    /* ─── UTILITIES ─── */
+    .utility-row { display: flex; gap: 8px; }
+    .utility-btn {
+      flex: 1; background: transparent; border: 1px solid rgba(18, 30, 54, 0.15);
+      border-radius: 999px; padding: 12px; text-align: center;
+      font-size: 9px; font-weight: 700; color: rgba(18, 30, 54, 0.6);
+      text-transform: uppercase; letter-spacing: 0.1em;
+    }
+    .utility-btn:active { background: rgba(18, 30, 54, 0.05); }
 
-  </style>
+  </style>
 </head>
 <body>
 
-  <header>
-    <img src="logo.png" alt="CONCERTO" class="header-logo">
-  </header>
+  <header>
+    <img src="logo.png" alt="CONCERTO" class="header-logo">
+  </header>
 
-  <main>
-    <div class="container">
-      
-      <div class="hero-card bf-click" onclick="buildfire.actionItems.execute({ title: 'Featured Tours', action: 'linkToApp', instanceId: '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765328171752' }, () => {})">
-        <div class="hero-top">
-          <span class="hero-eyebrow">Your Next Event</span>
-          <h3 class="hero-artist">Lady Gaga</h3>
-          <p class="hero-tour">The Mayhem Ball Tour • Soldier Field</p>
-        </div>
-        
-        <div class="timer-wrap">
-          <div class="timer-row">
-            <div class="time-block">
-              <span class="time-num" id="days">42</span>
-              <span class="time-label">Days</span>
-            </div>
-            <div class="time-colon">:</div>
-            <div class="time-block">
-              <span class="time-num" id="hours">14</span>
-              <span class="time-label">Hrs</span>
-            </div>
-            <div class="time-colon">:</div>
-            <div class="time-block">
-              <span class="time-num" id="mins">30</span>
-              <span class="time-label">Min</span>
-            </div>
-          </div>
-          <span class="hero-arrow">&rsaquo;</span>
-        </div>
-      </div>
+  <main>
+    <div class="container">
+      
+      <div class="hero-card bf-click" onclick="buildfire.actionItems.execute({ title: 'Featured Tours', action: 'linkToApp', instanceId: '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765328171752' }, () => {})">
+        <div class="hero-top">
+          <span class="hero-eyebrow">Your Next Event</span>
+          <h3 class="hero-artist">Lady Gaga</h3>
+          <p class="hero-tour">The Mayhem Ball Tour • Soldier Field</p>
+        </div>
+        
+        <div class="timer-wrap">
+          <div class="timer-row">
+            <div class="time-block">
+              <span class="time-num" id="days">42</span>
+              <span class="time-label">Days</span>
+            </div>
+            <div class="time-colon">:</div>
+            <div class="time-block">
+              <span class="time-num" id="hours">14</span>
+              <span class="time-label">Hrs</span>
+            </div>
+            <div class="time-colon">:</div>
+            <div class="time-block">
+              <span class="time-num" id="mins">30</span>
+              <span class="time-label">Min</span>
+            </div>
+          </div>
+          <span class="hero-arrow">&rsaquo;</span>
+        </div>
+      </div>
 
-      <div class="section-header bf-click" onclick="buildfire.actionItems.execute({ title: 'Featured Tours', action: 'linkToApp', instanceId: '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765328171752' }, () => {})">
-        <h2 class="section-title">Featured Tours</h2>
-        <span class="section-subtitle">Trending Now</span>
-      </div>
+      <div class="section-header bf-click" onclick="buildfire.actionItems.execute({ title: 'Featured Tours', action: 'linkToApp', instanceId: '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765328171752' }, () => {})">
+        <h2 class="section-title">Featured Tours</h2>
+        <span class="section-subtitle">Trending Now</span>
+      </div>
 
-      <div class="tour-scroll">
-        <div class="tour-card bf-click" onclick="buildfire.actionItems.execute({ title: 'Featured Tours', action: 'linkToApp', instanceId: '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765328171752' }, () => {})">
-          <img src="https://buildfire.imgix.net/8ef92dbd-0a8b-11f0-a97f-12565309935d/gaga.jpeg?auto=format&fit=crop&q=80&w=400" class="tour-img" alt="Lady Gaga">
-          <div class="tour-info">
-            <h4 class="tour-name">Lady Gaga</h4>
-            <p class="tour-desc">The Mayhem Ball Tour</p>
-          </div>
-        </div>
-        <div class="tour-card bf-click" onclick="buildfire.actionItems.execute({ title: 'Featured Tours', action: 'linkToApp', instanceId: '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765328171752' }, () => {})">
-          <img src="https://buildfire.imgix.net/8ef92dbd-0a8b-11f0-a97f-12565309935d/img_4557.jpeg?auto=format&fit=crop&q=80&w=400" class="tour-img" alt="Harry Styles">
-          <div class="tour-info">
-            <h4 class="tour-name">Harry Styles</h4>
-            <p class="tour-desc">Together, Together Tour</p>
-          </div>
-        </div>
-        <div class="tour-card bf-click" onclick="buildfire.actionItems.execute({ title: 'Featured Tours', action: 'linkToApp', instanceId: '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765328171752' }, () => {})">
-          <img src="https://buildfire.imgix.net/8ef92dbd-0a8b-11f0-a97f-12565309935d/img_4552.jpeg?auto=format&fit=crop&q=80&w=400" class="tour-img" alt="Conan Gray">
-          <div class="tour-info">
-            <h4 class="tour-name">Conan Gray</h4>
-            <p class="tour-desc">Wishbone World Tour</p>
-          </div>
-        </div>
-        <div class="tour-card bf-click" onclick="buildfire.actionItems.execute({ title: 'Featured Tours', action: 'linkToApp', instanceId: '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765328171752' }, () => {})">
-          <img src="https://buildfire.imgix.net/8ef92dbd-0a8b-11f0-a97f-12565309935d/img_4554.jpeg?auto=format&fit=crop&q=80&w=400" class="tour-img" alt="Ed Sheeran">
-          <div class="tour-info">
-            <h4 class="tour-name">Ed Sheeran</h4>
-            <p class="tour-desc">The LOOP Tour</p>
-          </div>
-        </div>
-        <div class="tour-card bf-click" onclick="buildfire.actionItems.execute({ title: 'Featured Tours', action: 'linkToApp', instanceId: '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765328171752' }, () => {})">
-          <img src="https://buildfire.imgix.net/8ef92dbd-0a8b-11f0-a97f-12565309935d/img_4556.jpeg?auto=format&fit=crop&q=80&w=400" class="tour-img" alt="Demi Lovato">
-          <div class="tour-info">
-            <h4 class="tour-name">Demi Lovato</h4>
-            <p class="tour-desc">It's Not That Deep</p>
-          </div>
-        </div>
-        <div class="tour-card bf-click" onclick="buildfire.actionItems.execute({ title: 'Featured Tours', action: 'linkToApp', instanceId: '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765328171752' }, () => {})">
-          <img src="https://buildfire.imgix.net/8ef92dbd-0a8b-11f0-a97f-12565309935d/img_4559.jpeg?auto=format&fit=crop&q=80&w=400" class="tour-img" alt="Olivia Dean">
-          <div class="tour-info">
-            <h4 class="tour-name">Olivia Dean</h4>
-            <p class="tour-desc">The Art of Loving Tour</p>
-          </div>
-        </div>
-        <div class="tour-card bf-click" onclick="buildfire.actionItems.execute({ title: 'Featured Tours', action: 'linkToApp', instanceId: '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765328171752' }, () => {})">
-          <img src="https://buildfire.imgix.net/8ef92dbd-0a8b-11f0-a97f-12565309935d/img_1194.jpeg?auto=format&fit=crop&q=80&w=400" class="tour-img" alt="Noah Kahan">
-          <div class="tour-info">
-            <h4 class="tour-name">Noah Kahan</h4>
-            <p class="tour-desc">The Great Divide Tour</p>
-          </div>
-        </div>
-      </div>
+      <div class="tour-scroll">
+        <div class="tour-card bf-click" onclick="buildfire.actionItems.execute({ title: 'Featured Tours', action: 'linkToApp', instanceId: '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765328171752' }, () => {})">
+          <img src="https://buildfire.imgix.net/8ef92dbd-0a8b-11f0-a97f-12565309935d/gaga.jpeg?auto=format&fit=crop&q=80&w=400" class="tour-img" alt="Lady Gaga">
+          <div class="tour-info">
+            <h4 class="tour-name">Lady Gaga</h4>
+            <p class="tour-desc">The Mayhem Ball Tour</p>
+          </div>
+        </div>
+        <div class="tour-card bf-click" onclick="buildfire.actionItems.execute({ title: 'Featured Tours', action: 'linkToApp', instanceId: '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765328171752' }, () => {})">
+          <img src="https://buildfire.imgix.net/8ef92dbd-0a8b-11f0-a97f-12565309935d/img_4557.jpeg?auto=format&fit=crop&q=80&w=400" class="tour-img" alt="Harry Styles">
+          <div class="tour-info">
+            <h4 class="tour-name">Harry Styles</h4>
+            <p class="tour-desc">Together, Together Tour</p>
+          </div>
+        </div>
+        <div class="tour-card bf-click" onclick="buildfire.actionItems.execute({ title: 'Featured Tours', action: 'linkToApp', instanceId: '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765328171752' }, () => {})">
+          <img src="https://buildfire.imgix.net/8ef92dbd-0a8b-11f0-a97f-12565309935d/img_4552.jpeg?auto=format&fit=crop&q=80&w=400" class="tour-img" alt="Conan Gray">
+          <div class="tour-info">
+            <h4 class="tour-name">Conan Gray</h4>
+            <p class="tour-desc">Wishbone World Tour</p>
+          </div>
+        </div>
+        <div class="tour-card bf-click" onclick="buildfire.actionItems.execute({ title: 'Featured Tours', action: 'linkToApp', instanceId: '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765328171752' }, () => {})">
+          <img src="https://buildfire.imgix.net/8ef92dbd-0a8b-11f0-a97f-12565309935d/img_4554.jpeg?auto=format&fit=crop&q=80&w=400" class="tour-img" alt="Ed Sheeran">
+          <div class="tour-info">
+            <h4 class="tour-name">Ed Sheeran</h4>
+            <p class="tour-desc">The LOOP Tour</p>
+          </div>
+        </div>
+        <div class="tour-card bf-click" onclick="buildfire.actionItems.execute({ title: 'Featured Tours', action: 'linkToApp', instanceId: '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765328171752' }, () => {})">
+          <img src="https://buildfire.imgix.net/8ef92dbd-0a8b-11f0-a97f-12565309935d/img_4556.jpeg?auto=format&fit=crop&q=80&w=400" class="tour-img" alt="Demi Lovato">
+          <div class="tour-info">
+            <h4 class="tour-name">Demi Lovato</h4>
+            <p class="tour-desc">It's Not That Deep</p>
+          </div>
+        </div>
+        <div class="tour-card bf-click" onclick="buildfire.actionItems.execute({ title: 'Featured Tours', action: 'linkToApp', instanceId: '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765328171752' }, () => {})">
+          <img src="https://buildfire.imgix.net/8ef92dbd-0a8b-11f0-a97f-12565309935d/img_4559.jpeg?auto=format&fit=crop&q=80&w=400" class="tour-img" alt="Olivia Dean">
+          <div class="tour-info">
+            <h4 class="tour-name">Olivia Dean</h4>
+            <p class="tour-desc">The Art of Loving Tour</p>
+          </div>
+        </div>
+        <div class="tour-card bf-click" onclick="buildfire.actionItems.execute({ title: 'Featured Tours', action: 'linkToApp', instanceId: '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765328171752' }, () => {})">
+          <img src="https://buildfire.imgix.net/8ef92dbd-0a8b-11f0-a97f-12565309935d/img_1194.jpeg?auto=format&fit=crop&q=80&w=400" class="tour-img" alt="Noah Kahan">
+          <div class="tour-info">
+            <h4 class="tour-name">Noah Kahan</h4>
+            <p class="tour-desc">The Great Divide Tour</p>
+          </div>
+        </div>
+      </div>
 
-      <div class="section-header">
-        <h2 class="section-title">Concerto Premium</h2>
-        <span class="section-subtitle">Unlock The Magic</span>
-      </div>
+      <div class="section-header">
+        <h2 class="section-title">Concerto Premium</h2>
+        <span class="section-subtitle">Unlock The Magic</span>
+      </div>
 
-      <div class="premium-grid">
-        <div class="premium-item bf-click" onclick="buildfire.actionItems.execute({title:'Concerto+', action:'linkToApp', instanceId:'169d5e94-6c5e-4769-b4ca-a7d0175985e7-1753914028797'}, () => {})">
-          <h4 class="premium-title">Concerto+</h4>
-          <p class="premium-desc">Your AI timeline and custom itinerary.</p>
-        </div>
-        <div class="premium-item bf-click" onclick="buildfire.actionItems.execute({title:'Bag Check', action:'linkToApp', instanceId:'169d5e94-6c5e-4769-b4ca-a7d0175985e7-1772922931812'}, () => {})">
-          <h4 class="premium-title">Bag Check</h4>
-          <p class="premium-desc">Instant camera verification for venues.</p>
-        </div>
-        <div class="premium-item bf-click" onclick="buildfire.actionItems.execute({title:'Live Mode', action:'linkToApp', instanceId:'169d5e94-6c5e-4769-b4ca-a7d0175985e7-1772904343170'}, () => {})">
-          <h4 class="premium-title">Live Mode</h4>
-          <p class="premium-desc">In-show hub and personalized recaps.</p>
-        </div>
-        <div class="premium-item bf-click" onclick="buildfire.actionItems.execute({title:'Festivals', action:'linkToApp', instanceId:'169d5e94-6c5e-4769-b4ca-a7d0175985e7-1766434667939'}, () => {})">
-          <h4 class="premium-title">Festivals</h4>
-          <p class="premium-desc">Multi-day lineups and survival intel.</p>
-        </div>
-      </div>
+      <div class="premium-grid">
+        <div class="premium-item bf-click" onclick="buildfire.actionItems.execute({title:'Concerto+', action:'linkToApp', instanceId:'169d5e94-6c5e-4769-b4ca-a7d0175985e7-1753914028797'}, () => {})">
+          <h4 class="premium-title">Concerto+</h4>
+          <p class="premium-desc">Your AI timeline and custom itinerary.</p>
+        </div>
+        <div class="premium-item bf-click" onclick="buildfire.actionItems.execute({title:'Bag Check', action:'linkToApp', instanceId:'169d5e94-6c5e-4769-b4ca-a7d0175985e7-1772922931812'}, () => {})">
+          <h4 class="premium-title">Bag Check</h4>
+          <p class="premium-desc">Instant camera verification for venues.</p>
+        </div>
+        <div class="premium-item bf-click" onclick="buildfire.actionItems.execute({title:'Live Mode', action:'linkToApp', instanceId:'169d5e94-6c5e-4769-b4ca-a7d0175985e7-1772904343170'}, () => {})">
+          <h4 class="premium-title">Live Mode</h4>
+          <p class="premium-desc">In-show hub and personalized recaps.</p>
+        </div>
+        <div class="premium-item bf-click" onclick="buildfire.actionItems.execute({title:'Festivals', action:'linkToApp', instanceId:'169d5e94-6c5e-4769-b4ca-a7d0175985e7-1766434667939'}, () => {})">
+          <h4 class="premium-title">Festivals</h4>
+          <p class="premium-desc">Multi-day lineups and survival intel.</p>
+        </div>
+      </div>
 
-      <div class="section-header">
-        <h2 class="section-title">The Essentials</h2>
-      </div>
+      <div class="section-header">
+        <h2 class="section-title">The Essentials</h2>
+      </div>
 
-      <div class="essentials-grid">
-        <div class="essential-btn bf-click" onclick="buildfire.actionItems.execute({ title: 'City Guides', action: 'linkToApp', instanceId: '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1764797790704' }, () => {})">City Guides <span class="essential-arrow">&rsaquo;</span></div>
-        <div class="essential-btn bf-click" onclick="buildfire.actionItems.execute({ title: 'Events Near Me', action: 'linkToApp', instanceId: '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1764709877985' }, () => {})">Events Near Me <span class="essential-arrow">&rsaquo;</span></div>
-        <div class="essential-btn bf-click" onclick="buildfire.actionItems.execute({ title: 'Setlists & Info', action: 'linkToApp', instanceId: '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1767642157588' }, () => {})">Setlists & Info <span class="essential-arrow">&rsaquo;</span></div>
-        <div class="essential-btn bf-click" onclick="buildfire.actionItems.execute({ title: 'Merch Locations', action: 'linkToApp', instanceId: 'ba4139dd-09c6-4121-aa4a-c72570af07fc-1745876476208' }, () => {})">Merch Locator <span class="essential-arrow">&rsaquo;</span></div>
-        <div class="essential-btn bf-click" onclick="buildfire.actionItems.execute({title:'Rideshare', action:'linkToApp', instanceId:'169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765237012145'}, () => {})">Rideshare <span class="essential-arrow">&rsaquo;</span></div>
-        <div class="essential-btn bf-click" onclick="buildfire.actionItems.execute({title:'Bag Policies', action:'linkToApp', instanceId:'169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765234047030'}, () => {})">Bag Policies <span class="essential-arrow">&rsaquo;</span></div>
-        <div class="essential-btn bf-click" onclick="buildfire.actionItems.execute({title:'Parking', action:'linkToApp', instanceId:'169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765234093628'}, () => {})">Parking Maps <span class="essential-arrow">&rsaquo;</span></div>
-        <div class="essential-btn bf-click" onclick="buildfire.actionItems.execute({title:'Concessions', action:'linkToApp', instanceId:'169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765234072898'}, () => {})">Concessions <span class="essential-arrow">&rsaquo;</span></div>
-      </div>
+      <div class="essentials-grid">
+        <div class="essential-btn bf-click" onclick="buildfire.actionItems.execute({ title: 'City Guides', action: 'linkToApp', instanceId: '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1764797790704' }, () => {})">City Guides <span class="essential-arrow">&rsaquo;</span></div>
+        <div class="essential-btn bf-click" onclick="buildfire.actionItems.execute({ title: 'Events Near Me', action: 'linkToApp', instanceId: '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1764709877985' }, () => {})">Events Near Me <span class="essential-arrow">&rsaquo;</span></div>
+        <div class="essential-btn bf-click" onclick="buildfire.actionItems.execute({ title: 'Setlists & Info', action: 'linkToApp', instanceId: '169d5e94-6c5e-4769-b4ca-a7d0175985e7-1767642157588' }, () => {})">Setlists & Info <span class="essential-arrow">&rsaquo;</span></div>
+        <div class="essential-btn bf-click" onclick="buildfire.actionItems.execute({ title: 'Merch Locations', action: 'linkToApp', instanceId: 'ba4139dd-09c6-4121-aa4a-c72570af07fc-1745876476208' }, () => {})">Merch Locator <span class="essential-arrow">&rsaquo;</span></div>
+        <div class="essential-btn bf-click" onclick="buildfire.actionItems.execute({title:'Rideshare', action:'linkToApp', instanceId:'169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765237012145'}, () => {})">Rideshare <span class="essential-arrow">&rsaquo;</span></div>
+        <div class="essential-btn bf-click" onclick="buildfire.actionItems.execute({title:'Bag Policies', action:'linkToApp', instanceId:'169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765234047030'}, () => {})">Bag Policies <span class="essential-arrow">&rsaquo;</span></div>
+        <div class="essential-btn bf-click" onclick="buildfire.actionItems.execute({title:'Parking', action:'linkToApp', instanceId:'169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765234093628'}, () => {})">Parking Maps <span class="essential-arrow">&rsaquo;</span></div>
+        <div class="essential-btn bf-click" onclick="buildfire.actionItems.execute({title:'Concessions', action:'linkToApp', instanceId:'169d5e94-6c5e-4769-b4ca-a7d0175985e7-1765234072898'}, () => {})">Concessions <span class="essential-arrow">&rsaquo;</span></div>
+      </div>
 
-      <div class="utility-row">
-        <div class="utility-btn bf-click" onclick="buildfire.actionItems.execute({title:'Weather', action:'linkToApp', instanceId:'0843baa9-8b51-4ba9-8357-7a114a69dd4e-1745352270979'}, () => {})">Local Weather</div>
-        <a href="mailto:support@concertocity.com" class="utility-btn">App Support</a>
-      </div>
+      <div class="utility-row">
+        <div class="utility-btn bf-click" onclick="buildfire.actionItems.execute({title:'Weather', action:'linkToApp', instanceId:'0843baa9-8b51-4ba9-8357-7a114a69dd4e-1745352270979'}, () => {})">Local Weather</div>
+        <a href="mailto:support@concertocity.com" class="utility-btn">App Support</a>
+      </div>
 
-    </div>
-  </main>
+    </div>
+  </main>
 
-  <script>
-    const eventDate = new Date();
-    eventDate.setDate(eventDate.getDate() + 42);
-    eventDate.setHours(eventDate.getHours() + 14);
-    eventDate.setMinutes(eventDate.getMinutes() + 30);
+  <script>
+    const eventDate = new Date();
+    eventDate.setDate(eventDate.getDate() + 42);
+    eventDate.setHours(eventDate.getHours() + 14);
+    eventDate.setMinutes(eventDate.getMinutes() + 30);
 
-    function updateTimer() {
-      const now = new Date();
-      const diff = eventDate - now;
+    function updateTimer() {
+      const now = new Date();
+      const diff = eventDate - now;
 
-      if (diff > 0) {
-        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
-        const m = Math.floor((diff / 1000 / 60) % 60);
+      if (diff > 0) {
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const m = Math.floor((diff / 1000 / 60) % 60);
 
-        document.getElementById('days').innerText = d.toString().padStart(2, '0');
-        document.getElementById('hours').innerText = h.toString().padStart(2, '0');
-        document.getElementById('mins').innerText = m.toString().padStart(2, '0');
-      }
-    }
+        document.getElementById('days').innerText = d.toString().padStart(2, '0');
+        document.getElementById('hours').innerText = h.toString().padStart(2, '0');
+        document.getElementById('mins').innerText = m.toString().padStart(2, '0');
+      }
+    }
 
-    updateTimer();
-    setInterval(updateTimer, 60000); 
-  </script>
+    updateTimer();
+    setInterval(updateTimer, 60000); 
+  </script>
 
 </body>
 </html>
